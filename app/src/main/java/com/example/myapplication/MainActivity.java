@@ -1,4 +1,4 @@
-package com.example.lab6demo;
+package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
+// Masoud Karimi 300286677
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,11 +29,12 @@ public class MainActivity extends AppCompatActivity {
     public void newProduct (View view) {
 
         int sku = Integer.parseInt(skuBox.getText().toString());
+        MyDBHandler dbHandler = new MyDBHandler(this);
 
         Product product = new Product(productBox.getText().toString(), sku);
 
         // TODO: add to database
-
+        dbHandler.addProduct(product);
         productBox.setText("");
 
         skuBox.setText("");
@@ -41,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
     public void lookupProduct (View view) {
 
         // TODO: get from Database
-        Product product = null;
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        Product product = dbHandler.findProduct(productBox.getText().toString());
 
         if (product != null) {
             idView.setText(String.valueOf(product.getID()));
@@ -55,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
     public void removeProduct (View view) {
 
         // TODO: remove from database
-        boolean result = false;
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        boolean result = dbHandler.deleteProduct(productBox.getText().toString());
 
         if (result) {
             idView.setText("Record Deleted");

@@ -1,7 +1,11 @@
-package com.example.lab6demo;
+package com.example.myapplication;
+
+// Masoud Karimi 300286677
 
 public class Product {
     private int _id;
+
+
     private String _productname;
     private int _sku;
 
